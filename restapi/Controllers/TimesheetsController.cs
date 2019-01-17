@@ -53,6 +53,27 @@ namespace restapi.Controllers
             return timecard;
         }
 
+        [HttpDelete("{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteLine(string id)
+        {
+            Timecard timecard = Database.Find(id);
+
+            if (timecard == null)
+            {
+                return NotFound();
+            }
+
+            if (timecard.Status != TimecardStatus.Cancelled && timecard.Status != TimecardStatus.Draft)
+            {
+                    return StatusCode(409, new InvalidStateError() { });
+            }
+
+            Database.Delete(id);
+            return Ok();
+        }
+
         [HttpGet("{id}/lines")]
         [Produces(ContentTypes.TimesheetLines)]
         [ProducesResponseType(typeof(IEnumerable<AnnotatedTimecardLine>), 200)]
@@ -100,7 +121,20 @@ namespace restapi.Controllers
                 return NotFound();
             }
         }
-        
+
+        [HttpPost("{timecardId}/lines/{lineId}")]
+        public IActionResult UpdateLine(string timecardId, string lineId, [FromBody] TimecardLine timecardLine)
+        {
+            Timecard timecard = Database.Find(timecardId);
+
+            if (timecard == null)
+            {
+                return NotFound();
+            }
+
+            return Ok();
+        }
+
         [HttpGet("{id}/transitions")]
         [Produces(ContentTypes.Transitions)]
         [ProducesResponseType(typeof(IEnumerable<Transition>), 200)]
