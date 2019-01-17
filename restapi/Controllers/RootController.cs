@@ -25,14 +25,35 @@ namespace restapi.Controllers
                             Type = ContentTypes.Timesheets,
                             Relationship = DocumentRelationship.Timesheets,
                             Reference = "/timesheets"
-                        },   
-                         new DocumentLink() 
-                        { 
+                        },
+                        new DocumentLink()
+                        {
                             Method = Method.Post,
-                            Type = ContentTypes.Timesheet,
+                            Type = ContentTypes.Timesheets,
                             Relationship = DocumentRelationship.CreateTimesheet,
                             Reference = "/timesheets"
-                        }   
+                        },
+                        new DocumentLink()
+                        {
+                            Method = Method.Delete,
+                            Type = ContentTypes.Timesheets,
+                            Relationship = DocumentRelationship.DeleteTimesheet,
+                            Reference = "/timesheets/{id}"
+                        },
+                        new DocumentLink()
+                        {
+                            Method = Method.Put,
+                            Type = ContentTypes.Timesheets,
+                            Relationship = DocumentRelationship.ReplaceTimeline,
+                            Reference = "/timesheets/{id}/lines/{uniqueIdentifier}"
+                        },
+                        new DocumentLink()
+                        {
+                            Method = Method.Patch,
+                            Type = ContentTypes.Timesheets,
+                            Relationship = DocumentRelationship.UpdateTimeline,
+                            Reference = "/timesheets/{id}/lines/{uniqueIdentifier}"
+                        }
                     }
                 }
             };

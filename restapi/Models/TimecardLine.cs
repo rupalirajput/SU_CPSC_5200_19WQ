@@ -15,6 +15,14 @@ namespace restapi.Models
         public float Hours { get; set; }
 
         public string Project { get; set; }
+
+        public int Resource { get; set; }
+
+        public string Op { get; set; }
+
+        public string Path { get; set; }
+
+        public string Value { get; set; }
     }
 
     public class AnnotatedTimecardLine : TimecardLine
@@ -30,6 +38,10 @@ namespace restapi.Models
             Day = line.Day;
             Hours = line.Hours;
             Project = line.Project;
+            Resource = line.Resource;
+            Op = line.Op;
+            Path = line.Path;
+            Value = line.Value;
 
             Recorded = DateTime.UtcNow;
             workDate = FirstDateOfWeekISO8601(line.Year, line.Week).AddDays((int)line.Day - 1);

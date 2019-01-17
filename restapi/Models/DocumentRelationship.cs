@@ -10,6 +10,13 @@ namespace restapi.Models
 
         Transitions,
 
-        Submittal
+        Submittal,
+
+        DeleteTimesheet,
+
+        ReplaceTimeline,
+
+        UpdateTimeline
+
     }
 }

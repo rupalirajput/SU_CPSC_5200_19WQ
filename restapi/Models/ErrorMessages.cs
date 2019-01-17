@@ -20,4 +20,11 @@ namespace restapi.Models
 
         public string Message { get => "No state transition of requested type present in timecard"; }
     }
+
+    public class InvalidResource
+    {
+        public int ErrorCode { get => 103; }
+
+        public string Message { get => "Resource not valid for current timecard"; }
+    }
 }
